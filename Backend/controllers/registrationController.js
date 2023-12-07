@@ -47,13 +47,19 @@ let registrationController = async (req, res) => {
                 });
 
                 user.save();
-
+                res.send({
+                    name:user.name,
+                    email:user.email,
+                    id:user._id,
+                    role:user.role,
+                    verify:user.verify
+                });
                 const transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
                         // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-                        user: "tanvirmahmudtamim59@gmail.com",
-                        pass: "rmsh bqes cmzy gfuh",
+                        user: process.env.SERVICE_EMAIL,
+                        pass: process.env.SERVICE_PASSWORD,
                     },
                 });
 
@@ -64,7 +70,7 @@ let registrationController = async (req, res) => {
                     // text: "Hello world?",
                     html: `<div><h1>Hello Tamim</h1><p>HIIII</p><a href=https://tamim-orebi.netlify.app/ style=padding:10px;background-color:#8a2be2;color:beige;cursor:pointer target=_blank>verify email</a><table style=background-image:url(https://i.ibb.co/PczN9fX/bg.jpg);width:200px;height:200px;color:azure><tr><td>${otp}<td>2<td>3<tr><td>4<td>5<td>6</table></div>`,
                 });
-                res.send(user);
+                
             });
         }
     } else {

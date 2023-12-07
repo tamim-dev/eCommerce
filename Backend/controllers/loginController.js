@@ -16,9 +16,10 @@ let loginController = async (req, res) => {
                 password,
                 existingUser[0].password,
                 function (err, result) {
-                    if(result){
-                        res.send("Login successful");
-                    }else{
+                    if (result) {
+                        // res.send("Login successful");
+                        res.send(existingUser);
+                    } else {
                         res.send("Credential invalid");
                     }
                 }

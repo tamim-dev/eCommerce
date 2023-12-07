@@ -1,28 +1,29 @@
 import React from "react";
 import { Button, Checkbox, Form, Input, Card } from "antd";
 import axiox from "axios";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
+const Otp = () => {
     let navigate = useNavigate();
+    let { email } = useParams();
     const onFinish = async (values) => {
         let data = {
-            name: values.name,
-            email: values.email,
-            password: values.password,
+            otp: values.otp,
+            email: email,
         };
         let user_data = await axiox.post(
-            "http://localhost:8000/api/v1/auth/registration",
+            "http://localhost:8000/api/v1/auth/otpverify",
             data
         );
-        navigate(`/otp/${user_data.data.email}`);
+        navigate("/login")
     };
     const onFinishFailed = (errorInfo) => {
         console.log(errorInfo.values);
     };
     return (
         <Card
-            title="Registration"
+            title="OTP"
             bordered={false}
             style={{
                 width: 400,
@@ -49,42 +50,16 @@ const Registration = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Username"
-                    name="name"
+                    label="Check email for OTP"
+                    name="otp"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your Username",
+                            message: "Please input your OTP",
                         },
                     ]}
                 >
                     <Input />
-                </Form.Item>
-
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please input your Email",
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please input your Password",
-                        },
-                    ]}
-                >
-                    <Input.Password />
                 </Form.Item>
 
                 <Form.Item
@@ -102,4 +77,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Otp;

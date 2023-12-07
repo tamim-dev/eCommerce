@@ -8,12 +8,14 @@ import {
 } from "react-router-dom";
 import Registration from "./components/pages/Registration";
 import Login from "./components/pages/Login";
+import Otp from "./components/pages/Otp";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route>
             <Route path="/" element={<Registration />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/otp/:email" element={<Otp />}></Route>
         </Route>
     )
 );

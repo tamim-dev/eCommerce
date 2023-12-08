@@ -1,33 +1,28 @@
 import React from "react";
 import { Button, Checkbox, Form, Input, Card } from "antd";
 import axiox from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Forgotpassword = () => {
     let navigate = useNavigate();
     const onFinish = async (values) => {
         let data = {
             email: values.email,
-            password: values.password,
         };
         let user_data = await axiox.post(
-            "http://localhost:8000/api/v1/auth/login",
+            "http://localhost:8000/api/v1/auth/forgotpassword",
             data
         );
-        if (user_data.role == "User") {
-            console.log("you do not have premission for login");
-        } else {
-            console.log(user_data.data);
-            console.log("you have premission for login");
-        }
-        // navigate();
+        console.log(user_data);
+        navigate("/login")
     };
     const onFinishFailed = (errorInfo) => {
         console.log(errorInfo.values);
     };
     return (
         <Card
-            title="Login"
+            title="Forgot Password"
             bordered={false}
             style={{
                 width: 400,
@@ -67,19 +62,6 @@ const Login = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please input your Password",
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item
                     wrapperCol={{
                         offset: 0,
                         span: 100,
@@ -87,12 +69,11 @@ const Login = () => {
                 >
                     <Button type="primary" htmlType="submit">
                         Submit
-                    </Button><br/>
-                    <Link to="/forgotpassword">Forgot Password</Link>
+                    </Button>
                 </Form.Item>
             </Form>
         </Card>
     );
 };
 
-export default Login;
+export default Forgotpassword;

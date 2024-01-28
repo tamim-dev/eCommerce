@@ -1,26 +1,16 @@
 import React, { useState } from "react";
-import { Button, message, Form, Input, Card } from "antd";
+import { Button, Form, Input, Card } from "antd";
 import axiox from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Registration = () => {
     let navigate = useNavigate();
-    const [messageApi, contextHolder] = message.useMessage();
     const [loadings, setLoadings] = useState(false);
     const [form] = Form.useForm();
 
-    const success = (e) => {
-        messageApi.open({
-            type: "success",
-            content: e,
-        });
-    };
-    const errors = (e) => {
-        messageApi.open({
-            type: "error",
-            content: e,
-        });
-    };
+    const notifysuccess = (mas) => toast.success(mas);
+    const notifyerror = (mas) => toast.error(mas);
 
     const onFinish = async (values) => {
         setLoadings(true);
@@ -37,11 +27,11 @@ const Registration = () => {
         if (user_data.data.success) {
             form.resetFields();
             setLoadings(false);
-            success(user_data.data.success);
+            notifysuccess(user_data.data.success);
             navigate(`/otp/${user_data.data.email}`);
         } else {
             setLoadings(false);
-            errors(user_data.data.error);
+            notifyerror(user_data.data.error);
         }
     };
 
@@ -55,7 +45,6 @@ const Registration = () => {
                 textAlign: "center",
             }}
         >
-            {contextHolder}
             <Form
                 name="basic"
                 labelCol={{

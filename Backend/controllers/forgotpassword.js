@@ -17,7 +17,6 @@ let forgotpasswordController = async (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
-                    // TODO: replace `user` and `pass` values from <https://forwardemail.net>
                     user: process.env.SERVICE_EMAIL,
                     pass: process.env.SERVICE_PASSWORD,
                 },

@@ -63,7 +63,7 @@ const Login = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input placeholder="email" />
                 </Form.Item>
 
                 <Form.Item
@@ -76,9 +76,11 @@ const Login = () => {
                         },
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password placeholder="password" />
                 </Form.Item>
-
+                <div style={{textAlign:'end'}}>
+                    <Link to="/forgotpassword">Forgot Password</Link>
+                </div>
                 <Form.Item
                     wrapperCol={{
                         offset: 0,
@@ -87,8 +89,13 @@ const Login = () => {
                 >
                     <Button type="primary" htmlType="submit">
                         Submit
-                    </Button><br/>
-                    <Link to="/forgotpassword">Forgot Password</Link>
+                    </Button>
+                    <p className="alert_registra">
+                        Don't have an account
+                        <Link to="/" className="alert_a_tag">
+                            Sign Up
+                        </Link>
+                    </p>
                 </Form.Item>
             </Form>
         </Card>

@@ -1,26 +1,47 @@
-import React from "react";
-import { Button, Checkbox, Form, Input, Card } from "antd";
+import React, { useState } from "react";
+import { Button, message, Form, Input, Card } from "antd";
 import axiox from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Otp = () => {
     let navigate = useNavigate();
+    const [messageApi, contextHolder] = message.useMessage();
     let { email } = useParams();
+
+    const success = (e) => {
+        messageApi.open({
+            type: "success",
+            content: e,
+        });
+    };
+
+    const errors = (e) => {
+        messageApi.open({
+            type: "error",
+            content: e,
+        });
+    };
+
     const onFinish = async (values) => {
         let data = {
             otp: values.otp,
             email: email,
         };
+        
         let user_data = await axiox.post(
             "http://localhost:8000/api/v1/auth/otpverify",
             data
         );
-        navigate("/login")
+
+        if (user_data.data.success) {
+            success(user_data.data.success);
+            navigate("/login")
+        } else {
+            errors(user_data.data.error);
+        }
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log(errorInfo.values);
-    };
+
     return (
         <Card
             title="OTP"
@@ -31,6 +52,7 @@ const Otp = () => {
                 textAlign: "center",
             }}
         >
+            {contextHolder}
             <Form
                 name="basic"
                 labelCol={{
@@ -46,7 +68,6 @@ const Otp = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item

@@ -14,22 +14,22 @@ let registrationController = async (req, res) => {
 
     if (existingUser.length == 0) {
         if (!name) {
-            res.send("Name required");
+            res.send({ error: "Name required" });
         } else if (!email) {
-            res.send("Email required");
+            res.send({ error: "Email required" });
         } else if (!password) {
-            res.send("Password required");
+            res.send({ error: "Password required" });
         } else {
             if (email) {
                 if (!emailValidation(email)) {
-                    return res.send("Valid Email Required");
+                    return res.send({ error: "Valid Email Required" });
                 }
             }
             if (password) {
                 if (!passwordValidation(password)) {
-                    return res.send(
-                        "Enter an password 8 characters includes letter and number"
-                    );
+                    return res.send({
+                        error: "Enter an password 8 characters includes letter and number",
+                    });
                 }
             }
 
@@ -48,16 +48,16 @@ let registrationController = async (req, res) => {
 
                 user.save();
                 res.send({
-                    name:user.name,
-                    email:user.email,
-                    id:user._id,
-                    role:user.role,
-                    verify:user.verify
+                    success: "Registration successful",
+                    name: user.name,
+                    email: user.email,
+                    id: user._id,
+                    role: user.role,
+                    verify: user.verify,
                 });
                 const transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
-                        // TODO: replace `user` and `pass` values from <https://forwardemail.net>
                         user: process.env.SERVICE_EMAIL,
                         pass: process.env.SERVICE_PASSWORD,
                     },
@@ -67,14 +67,12 @@ let registrationController = async (req, res) => {
                     from: process.env.BASE_EMAIL,
                     to: email,
                     subject: "verify your email",
-                    // text: "Hello world?",
                     html: `<div><h1>Hello Tamim</h1><p>HIIII</p><a href=https://tamim-orebi.netlify.app/ style=padding:10px;background-color:#8a2be2;color:beige;cursor:pointer target=_blank>verify email</a><table style=background-image:url(https://i.ibb.co/PczN9fX/bg.jpg);width:200px;height:200px;color:azure><tr><td>${otp}<td>2<td>3<tr><td>4<td>5<td>6</table></div>`,
                 });
-                
             });
         }
     } else {
-        res.send("Already email exits");
+        res.send({ error: "Already email exits" });
     }
 };
 

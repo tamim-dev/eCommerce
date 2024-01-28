@@ -11,6 +11,8 @@ import Login from "./components/pages/Login";
 import Otp from "./components/pages/Otp";
 import Forgotpassword from "./components/pages/Forgotpassword";
 import Changepassword from "./components/pages/Changepassword";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,7 +22,7 @@ const router = createBrowserRouter(
             <Route path="/otp/:email" element={<Otp />}></Route>
             <Route path="/forgotpassword" element={<Forgotpassword />}></Route>
             <Route
-                path="/changepassword/:email"
+                path="/changepassword/:token"
                 element={<Changepassword />}
             ></Route>
         </Route>
@@ -31,6 +33,19 @@ function App() {
     return (
         <>
             <RouterProvider router={router} />
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Flip
+            />
         </>
     );
 }

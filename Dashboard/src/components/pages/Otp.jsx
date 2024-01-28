@@ -1,27 +1,16 @@
 import React, { useState } from "react";
-import { Button, message, Form, Input, Card } from "antd";
+import { Button, Form, Input, Card } from "antd";
 import axiox from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Otp = () => {
     let navigate = useNavigate();
-    const [messageApi, contextHolder] = message.useMessage();
     let { email } = useParams();
+    const notifysuccess = (mas) => toast.success(mas);
+    const notifyerror = (mas) => toast.error(mas);
 
-    const success = (e) => {
-        messageApi.open({
-            type: "success",
-            content: e,
-        });
-    };
-
-    const errors = (e) => {
-        messageApi.open({
-            type: "error",
-            content: e,
-        });
-    };
 
     const onFinish = async (values) => {
         let data = {
@@ -35,10 +24,10 @@ const Otp = () => {
         );
 
         if (user_data.data.success) {
-            success(user_data.data.success);
+            notifysuccess(user_data.data.success);
             navigate("/login")
         } else {
-            errors(user_data.data.error);
+            notifyerror(user_data.data.error);
         }
     };
 
@@ -52,7 +41,7 @@ const Otp = () => {
                 textAlign: "center",
             }}
         >
-            {contextHolder}
+            <p style={{fontSize:"24px"}}>Please check your email for OTP</p>
             <Form
                 name="basic"
                 labelCol={{
@@ -71,7 +60,7 @@ const Otp = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Check email for OTP"
+                    label="OTP"
                     name="otp"
                     rules={[
                         {

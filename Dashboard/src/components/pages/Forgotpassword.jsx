@@ -1,11 +1,16 @@
 import React from "react";
-import { Button, Checkbox, Form, Input, Card } from "antd";
+import { Button, message, Form, Input, Card } from "antd";
 import axiox from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Forgotpassword = () => {
     let navigate = useNavigate();
+
+    const notifysuccess = (mas) => toast.success(mas);
+    const notifyerror = (mas) => toast.error(mas);
+
     const onFinish = async (values) => {
         let data = {
             email: values.email,
@@ -14,12 +19,15 @@ const Forgotpassword = () => {
             "http://localhost:8000/api/v1/auth/forgotpassword",
             data
         );
-        console.log(user_data);
-        navigate("/login")
+
+        if (user_data.data.success) {
+            notifysuccess(user_data.data.success);
+            navigate("/login");
+        } else {
+            notifyerror(user_data.data.error);
+        }
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log(errorInfo.values);
-    };
+
     return (
         <Card
             title="Forgot Password"
@@ -45,7 +53,6 @@ const Forgotpassword = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item

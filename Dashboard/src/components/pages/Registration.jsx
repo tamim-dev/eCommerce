@@ -1,11 +1,29 @@
-import React from "react";
-import { Button, Checkbox, Form, Input, Card } from "antd";
+import React, { useState } from "react";
+import { Button, message, Form, Input, Card } from "antd";
 import axiox from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
     let navigate = useNavigate();
+    const [messageApi, contextHolder] = message.useMessage();
+    const [loadings, setLoadings] = useState(false);
+    const [form] = Form.useForm();
+
+    const success = (e) => {
+        messageApi.open({
+            type: "success",
+            content: e,
+        });
+    };
+    const errors = (e) => {
+        messageApi.open({
+            type: "error",
+            content: e,
+        });
+    };
+
     const onFinish = async (values) => {
+        setLoadings(true);
         let data = {
             name: values.name,
             email: values.email,
@@ -15,11 +33,18 @@ const Registration = () => {
             "http://localhost:8000/api/v1/auth/registration",
             data
         );
-        navigate(`/otp/${user_data.data.email}`);
+
+        if (user_data.data.success) {
+            form.resetFields();
+            setLoadings(false);
+            success(user_data.data.success);
+            navigate(`/otp/${user_data.data.email}`);
+        } else {
+            setLoadings(false);
+            errors(user_data.data.error);
+        }
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log(errorInfo.values);
-    };
+
     return (
         <Card
             title="Registration"
@@ -30,6 +55,7 @@ const Registration = () => {
                 textAlign: "center",
             }}
         >
+            {contextHolder}
             <Form
                 name="basic"
                 labelCol={{
@@ -45,8 +71,8 @@ const Registration = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
+                form={form}
             >
                 <Form.Item
                     label="Username"
@@ -58,7 +84,7 @@ const Registration = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input placeholder="full name" />
                 </Form.Item>
 
                 <Form.Item
@@ -71,7 +97,7 @@ const Registration = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input placeholder="email" />
                 </Form.Item>
 
                 <Form.Item
@@ -84,7 +110,7 @@ const Registration = () => {
                         },
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password placeholder="password" />
                 </Form.Item>
 
                 <Form.Item
@@ -93,9 +119,21 @@ const Registration = () => {
                         span: 100,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
+                    {loadings ? (
+                        <Button type="primary" loading>
+                            Submit
+                        </Button>
+                    ) : (
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    )}
+                    <p className="alert_registra">
+                        Allready have an account
+                        <Link to="/login" className="alert_a_tag">
+                            Sign In
+                        </Link>
+                    </p>
                 </Form.Item>
             </Form>
         </Card>

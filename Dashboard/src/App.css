@@ -1,0 +1,13 @@
+.alert_registra {
+    margin-top: 1rem;
+    background: #e6f4ff;
+    padding: 0.3125rem 0;
+    border: 1px #91CAFF solid;
+    border-radius: 0.5rem;
+}
+
+.alert_registra .alert_a_tag{
+    margin-left: 0.3125rem;
+}
+
+

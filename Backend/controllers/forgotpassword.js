@@ -23,7 +23,7 @@ let forgotpasswordController = async (req, res) => {
                     let addToken = await User.updateOne(
                         { email: email },
                         { $set: { token: token } },
-                        { new: true, strict: false }
+                        { strict: false }
                     );
                     const transporter = nodemailer.createTransport({
                         service: "gmail",

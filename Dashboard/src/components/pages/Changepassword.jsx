@@ -3,25 +3,31 @@ import { Button, Checkbox, Form, Input, Card } from "antd";
 import axiox from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Changepassword = () => {
     let navigate = useNavigate();
-    let {email } =useParams()
+    let { token } = useParams();
+    const notifysuccess = (mas) => toast.success(mas);
+    const notifyerror = (mas) => toast.error(mas);
+
     const onFinish = async (values) => {
         let data = {
-            email:email,
+            token: token,
             password: values.password,
         };
         let user_data = await axiox.post(
-            "http://localhost:8000/api/v1/auth/forgotpassword",
+            "http://localhost:8000/api/v1/auth/changepassword",
             data
         );
-        console.log(user_data);
-        navigate("/login");
+        if (user_data.data.success) {
+            notifysuccess(user_data.data.success);
+            navigate("/login");
+        } else {
+            notifyerror(user_data.data.error);
+        }
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log(errorInfo.values);
-    };
+
     return (
         <Card
             title="Change Password"
@@ -47,7 +53,6 @@ const Changepassword = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item

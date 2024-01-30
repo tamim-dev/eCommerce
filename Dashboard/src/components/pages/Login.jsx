@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { userData } from "../../features/userSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input, Card, Col, Row } from "antd";
+import { Button, Form, Input, Card} from "antd";
 
 const Login = () => {
     let navigate = useNavigate();

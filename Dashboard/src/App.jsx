@@ -13,6 +13,8 @@ import Forgotpassword from "./components/pages/Forgotpassword";
 import Changepassword from "./components/pages/Changepassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Home from "./components/pages/home/Home";
+import UserList from "./components/pages/home/UserList";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,6 +27,9 @@ const router = createBrowserRouter(
                 path="/changepassword/:token"
                 element={<Changepassword />}
             ></Route>
+            <Route path="/home" element={<Home />}>
+                <Route path="userlist" element={UserList}></Route>
+            </Route>
         </Route>
     )
 );

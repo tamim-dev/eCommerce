@@ -7,10 +7,10 @@ let loginController = async (req, res) => {
     let existingUser = await User.find({ email: email });
 
     if (existingUser.length == 0) {
-        res.send("Credential invalid");
+        res.send({ error: "Credential invalid" });
     } else {
         if (existingUser[0].verify == false) {
-            res.send("Please verify Email");
+            res.send({ error: "Please verify Email" });
         } else {
             bcrypt.compare(
                 password,
@@ -18,6 +18,7 @@ let loginController = async (req, res) => {
                 function (err, result) {
                     if (result) {
                         res.send({
+                            success: "Login successful",
                             id: existingUser[0]._id,
                             name: existingUser[0].name,
                             email: existingUser[0].email,
@@ -25,7 +26,7 @@ let loginController = async (req, res) => {
                             verify: existingUser[0].verify,
                         });
                     } else {
-                        res.send("Credential invalid");
+                        res.send({ error: "Password invalid" });
                     }
                 }
             );

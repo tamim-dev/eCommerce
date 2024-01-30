@@ -1,30 +1,43 @@
 import React from "react";
-import { Button, Checkbox, Form, Input, Card } from "antd";
 import axiox from "axios";
+import { toast } from "react-toastify";
+import { userData } from "../../features/userSlice";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { Button, Checkbox, Form, Input, Card, Col, Row } from "antd";
 
 const Login = () => {
     let navigate = useNavigate();
+    let dispatch = useDispatch();
+
+    const notifysuccess = (mas) => toast.success(mas);
+    const notifyerror = (mas) => toast.error(mas);
+
     const onFinish = async (values) => {
         let data = {
             email: values.email,
             password: values.password,
         };
+
         let user_data = await axiox.post(
             "http://localhost:8000/api/v1/auth/login",
             data
         );
-        if (user_data.role == "User") {
-            console.log("you do not have premission for login");
+
+        if (user_data.data.success) {
+            if (user_data.data.role == "User") {
+                notifyerror("you do not have premission for login");
+            } else {
+                notifysuccess(user_data.data.success);
+                navigate("/home");
+                dispatch(userData(user_data.data));
+                localStorage.setItem("user", JSON.stringify(user_data.data));
+            }
         } else {
-            console.log(user_data.data);
-            console.log("you have premission for login");
+            notifyerror(user_data.data.error);
         }
-        // navigate();
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log(errorInfo.values);
-    };
+
     return (
         <Card
             title="Login"
@@ -50,7 +63,6 @@ const Login = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item
@@ -78,7 +90,7 @@ const Login = () => {
                 >
                     <Input.Password placeholder="password" />
                 </Form.Item>
-                <div style={{textAlign:'end'}}>
+                <div style={{ textAlign: "end" }}>
                     <Link to="/forgotpassword">Forgot Password</Link>
                 </div>
                 <Form.Item

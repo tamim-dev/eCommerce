@@ -1,5 +1,5 @@
 import React from "react";
-import axiox from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { userData } from "../../features/userSlice";
 import { useDispatch } from "react-redux";
@@ -19,7 +19,7 @@ const Login = () => {
             password: values.password,
         };
 
-        let user_data = await axiox.post(
+        let user_data = await axios.post(
             "http://localhost:8000/api/v1/auth/login",
             data
         );

@@ -1,5 +1,5 @@
 import React from "react";
-import axiox from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Button, message, Form, Input, Card } from "antd";
@@ -14,7 +14,7 @@ const Forgotpassword = () => {
         let data = {
             email: values.email,
         };
-        let user_data = await axiox.post(
+        let user_data = await axios.post(
             "http://localhost:8000/api/v1/auth/forgotpassword",
             data
         );

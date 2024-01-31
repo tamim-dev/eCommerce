@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Checkbox, Form, Input, Card } from "antd";
-import axiox from "axios";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ const Changepassword = () => {
             token: token,
             password: values.password,
         };
-        let user_data = await axiox.post(
+        let user_data = await axios.post(
             "http://localhost:8000/api/v1/auth/changepassword",
             data
         );

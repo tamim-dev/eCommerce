@@ -28,7 +28,7 @@ const router = createBrowserRouter(
                 element={<Changepassword />}
             ></Route>
             <Route path="/home" element={<Home />}>
-                <Route path="userlist" element={UserList}></Route>
+                <Route path="userlist" element={<UserList/>}></Route>
             </Route>
         </Route>
     )

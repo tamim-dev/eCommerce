@@ -3,7 +3,6 @@ import axios from "axios";
 import { Table } from "antd";
 
 const UserList = () => {
-    let [usersName, setUsersName] = useState([]);
     let [usersEmail, setUsersEmail] = useState([]);
     let [usersList, setUsersList] = useState([]);
 
@@ -15,17 +14,7 @@ const UserList = () => {
 
             setUsersList(user_data.data);
 
-            let username = [];
             let useremail = [];
-
-            user_data.data.map((item, index) => {
-                username.push({
-                    text: item.name,
-                    value: item.name,
-                    key: item._id,
-                });
-            });
-            setUsersName(username);
 
             user_data.data.map((item, index) => {
                 useremail.push({
@@ -35,8 +24,6 @@ const UserList = () => {
                 });
             });
             setUsersEmail(useremail);
-
-            
         }
         user();
     }, []);

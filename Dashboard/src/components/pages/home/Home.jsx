@@ -26,15 +26,15 @@ const Home = () => {
         getItem("Product", "sub2", <AppstoreOutlined />, [
             getItem("Categroy", "sub3", null, [
                 getItem("Add Category", "7"),
-                getItem("View Category", "8"),
+                getItem("View Category", "/home/viewcategory"),
             ]),
             getItem("Sub Categroy", "sub5", null, [
                 getItem("Option 7", "13"),
                 getItem("Option 8", "14"),
             ]),
             getItem("Product", "sub6", null, [
-                getItem("Option 7", "13"),
-                getItem("Option 8", "14"),
+                getItem("Option 7", "15"),
+                getItem("Option 8", "16"),
             ]),
         ]),
         {
@@ -60,7 +60,7 @@ const Home = () => {
                             width: "100%",
                         }}
                         defaultSelectedKeys={["1"]}
-                        defaultOpenKeys={["sub1","sub2"]}
+                        defaultOpenKeys={["sub1", "sub2", "sub3", "sub5"]}
                         mode="inline"
                         items={items}
                     />

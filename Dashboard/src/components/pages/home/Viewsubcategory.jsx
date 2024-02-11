@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Button, Space, Table } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Table } from "antd";
 
-const Viewcategory = () => {
-    let [category, setCategory] = useState([]);
+const Viewsubcategory = () => {
+    let [subcategory, setSubCategory] = useState([]);
 
     useEffect(() => {
         let arr = [];
         async function category() {
-            let categoryData = await axios.get(
-                "http://localhost:8000/api/v1/product/allcategory"
+            let subcategoryData = await axios.get(
+                "http://localhost:8000/api/v1/product/allsubcategory"
             );
 
-            categoryData.data.map((item) => {
+            subcategoryData.data.map((item) => {
                 arr.push({
                     key: item._id,
                     name: item.name,
                     isActive: item.isActive ? "Approved" : "Pending",
                 });
             });
-            setCategory(arr);
+            setSubCategory(arr);
         }
         category();
     }, []);
@@ -37,16 +37,9 @@ const Viewcategory = () => {
         {
             title: "Action",
             dataIndex: "action",
-            render: (_, record) => (
-                <Space>
-                    <Button>Edit </Button>
-                    <Button>Delete</Button>
-                </Space>
-            ),
         },
     ];
-
-    return <Table columns={columns} dataSource={category} />;
+  return <Table columns={columns} dataSource={subcategory} />;
 };
 
-export default Viewcategory;
+export default Viewsubcategory;

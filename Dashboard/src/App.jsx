@@ -17,6 +17,8 @@ import Home from "./components/pages/home/Home";
 import UserList from "./components/pages/home/UserList";
 import Viewcategory from "./components/pages/home/Viewcategory";
 import Addcategory from "./components/pages/home/Addcategory";
+import Addsubcategory from "./components/pages/home/Addsubcategory";
+import Viewsubcategory from "./components/pages/home/Viewsubcategory";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -30,9 +32,17 @@ const router = createBrowserRouter(
                 element={<Changepassword />}
             ></Route>
             <Route path="/home" element={<Home />}>
-                <Route path="userlist" element={<UserList/>}></Route>
-                <Route path="viewcategory" element={<Viewcategory/>}></Route>
-                <Route path="addcategory" element={<Addcategory/>}></Route>
+                <Route path="userlist" element={<UserList />}></Route>
+                <Route path="viewcategory" element={<Viewcategory />}></Route>
+                <Route path="addcategory" element={<Addcategory />}></Route>
+                <Route
+                    path="addsubcategory"
+                    element={<Addsubcategory />}
+                ></Route>
+                <Route
+                    path="viewsubcategory"
+                    element={<Viewsubcategory />}
+                ></Route>
             </Route>
         </Route>
     )

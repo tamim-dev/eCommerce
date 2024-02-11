@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Form, Input } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
 const Addcategory = () => {
     let ownerId = useSelector((state) => state.users.value);
+    let [mess, setMess] = useState("");
+    const [form] = Form.useForm();
+
     const onFinish = async (values) => {
         let data = {
             name: values.caregory,
@@ -15,7 +18,13 @@ const Addcategory = () => {
             "http://localhost:8000/api/v1/product/createcategory",
             data
         );
-        console.log(categoryData);
+        if (categoryData.data.success) {
+            form.resetFields();
+            setMess(categoryData.data.success);
+        }else{
+            form.resetFields();
+            setMess(categoryData.data.error);
+        }
     };
 
     return (
@@ -44,7 +53,9 @@ const Addcategory = () => {
                 }}
                 onFinish={onFinish}
                 autoComplete="off"
+                form={form}
             >
+                <p>{mess}</p>
                 <Form.Item
                     label="Caregory"
                     name="caregory"

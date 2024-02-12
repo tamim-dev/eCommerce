@@ -9,8 +9,10 @@ const Addcategory = () => {
     const [form] = Form.useForm();
 
     const onFinish = async (values) => {
+        let name =
+            values.caregory.charAt(0).toUpperCase() + values.caregory.slice(1);
         let data = {
-            name: values.caregory,
+            name: name,
             ownerId: ownerId.id,
         };
 
@@ -21,11 +23,17 @@ const Addcategory = () => {
         if (categoryData.data.success) {
             form.resetFields();
             setMess(categoryData.data.success);
-        }else{
+        } else {
             form.resetFields();
             setMess(categoryData.data.error);
         }
     };
+
+    if (mess) {
+        setTimeout(() => {
+            setMess("");
+        }, 4000);
+    }
 
     return (
         <Card

@@ -4,8 +4,8 @@ let categoryController = async (req, res) => {
     let { name, ownerId } = req.body;
 
     let existingName = await Category.find({ name: name });
-
-    if (!existingName) {
+    
+    if (existingName.length == 0) {
         let category = new Category({
             name: name,
             ownerId: ownerId,

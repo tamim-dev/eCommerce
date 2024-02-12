@@ -1,0 +1,10 @@
+:where(.css-dev-only-do-not-override-6j9yrn).ant-space-gap-col-small {
+    width: 100%;
+}
+
+.td.ant-table-cell{
+    width: 200px;
+}
+.buttonWidth {
+    width: 100px !important;
+}

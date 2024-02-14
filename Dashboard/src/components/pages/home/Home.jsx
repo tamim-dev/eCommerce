@@ -6,9 +6,11 @@ import {
     SettingOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
     let navigate = useNavigate();
+    let loginData = useSelector((state) => state.users.value);
 
     function getItem(label, key, icon, children, type) {
         return {
@@ -20,6 +22,7 @@ const Home = () => {
         };
     }
     const items = [
+        loginData.role == "Admin" &&
         getItem("User", "sub1", <MailOutlined />, [
             getItem("Users", "/home/userlist"),
         ]),

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Button, Space, Table, Input, Modal, Form } from "antd";
 import React, { useEffect, useState } from "react";
 import { PoweroffOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 const Viewcategory = () => {
     let [category, setCategory] = useState([]);
@@ -11,8 +12,10 @@ const Viewcategory = () => {
     let [values, setValues] = useState("");
     let [editid, setEditid] = useState("");
     const [loadings, setLoadings] = useState(false);
+    const [loadingstwo, setLoadingsTwo] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form] = Form.useForm();
+    let loginData = useSelector((state) => state.users.value);
 
     const showModal = (id) => {
         setIsModalOpen(true);
@@ -79,7 +82,6 @@ const Viewcategory = () => {
         setRealtime(!realtime);
 
         if (categoryDelete.data.success) {
-            setLoadings("");
             form.resetFields();
             setIsModalOpen(false);
         } else if (categoryDelete.data.error) {
@@ -102,15 +104,7 @@ const Viewcategory = () => {
             dataIndex: "action",
             render: (_, record) => (
                 <Space>
-                    {loadings == record.key ? (
-                        <Button
-                            className="buttonWidth"
-                            icon={<PoweroffOutlined />}
-                            loading
-                        >
-                            Edit
-                        </Button>
-                    ) : (
+                    {loginData.role == "Merchant" && (
                         <Button
                             className="buttonWidth"
                             onClick={() => showModal(record)}
@@ -123,16 +117,36 @@ const Viewcategory = () => {
                             className="buttonWidth"
                             icon={<PoweroffOutlined />}
                             loading
+                            danger
                         >
                             Delete
                         </Button>
                     ) : (
                         <Button
                             className="buttonWidth"
+                            danger
                             onClick={() => handleDelete(record)}
                         >
                             Delete
                         </Button>
+                    )}
+                    {loginData.role == "Admin" && loadingstwo == record.key ? (
+                        <Button
+                            className="buttonWidth"
+                            icon={<PoweroffOutlined />}
+                            loading
+                        >
+                            approve
+                        </Button>
+                    ) : (
+                        loginData.role == "Admin" && (
+                            <Button
+                                className="buttonWidth"
+                                onClick={() => handleDelete(record)}
+                            >
+                                approve
+                            </Button>
+                        )
                     )}
                 </Space>
             ),

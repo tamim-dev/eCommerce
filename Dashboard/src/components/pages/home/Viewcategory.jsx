@@ -143,7 +143,6 @@ const Viewcategory = () => {
                         loginData.role == "Admin" && (
                             <Button
                                 className="buttonWidth"
-                                onClick={() => handleDelete(record)}
                                 type="primary" ghost
                             >
                                 approve

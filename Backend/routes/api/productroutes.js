@@ -6,6 +6,7 @@ const subCategoryController = require("../../controllers/subCategoryController")
 const allsubCategoryController = require("../../controllers/allSubCategoryController");
 const productController = require("../../controllers/productController");
 const deleteCategory = require("../../controllers/deleteCategory");
+const deleteSubCategory = require("../../controllers/deleteSubCategory");
 const editEategoryController = require("../../controllers/editCategory");
 
 router.get("/allcategory", allCategoryController);
@@ -15,6 +16,7 @@ router.post("/createcategory", categoryController);
 router.post("/createsubcategory", subCategoryController);
 router.post("/createproduct", productController);
 router.post("/deletecategory", deleteCategory);
+router.post("/deletesubcategory", deleteSubCategory);
 router.post("/editcategory", editEategoryController);
 
 module.exports = router;

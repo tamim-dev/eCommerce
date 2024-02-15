@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table, Space, Button, Modal, Form, Input } from "antd";
 import { useSelector } from "react-redux";
+import { PoweroffOutlined } from "@ant-design/icons";
 
 const Viewsubcategory = () => {
     let loginData = useSelector((state) => state.users.value);
     const [form] = Form.useForm();
     let [subcategory, setSubCategory] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    let [realtime, setRealtime] = useState(Boolean);
     let [messedit, setMessEdit] = useState("");
     let [mess, setMess] = useState("");
     const [loadings, setLoadings] = useState(false);
@@ -40,7 +42,7 @@ const Viewsubcategory = () => {
             setSubCategory(arr);
         }
         category();
-    }, []);
+    }, [realtime]);
 
     const columns = [
         {
@@ -116,7 +118,7 @@ const Viewsubcategory = () => {
             id: id.key,
         };
         let categoryDelete = await axios.post(
-            "http://localhost:8000/api/v1/product/deletecategory",
+            "http://localhost:8000/api/v1/product/deletesubcategory",
             data
         );
         setRealtime(!realtime);

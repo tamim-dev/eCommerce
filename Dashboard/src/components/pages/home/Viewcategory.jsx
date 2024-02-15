@@ -135,6 +135,7 @@ const Viewcategory = () => {
                             className="buttonWidth"
                             icon={<PoweroffOutlined />}
                             loading
+                            type="primary" ghost
                         >
                             approve
                         </Button>
@@ -143,6 +144,7 @@ const Viewcategory = () => {
                             <Button
                                 className="buttonWidth"
                                 onClick={() => handleDelete(record)}
+                                type="primary" ghost
                             >
                                 approve
                             </Button>

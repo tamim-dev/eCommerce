@@ -31,7 +31,7 @@ const router = createBrowserRouter(
                 path="/changepassword/:token"
                 element={<Changepassword />}
             ></Route>
-            <Route path="/home" element={<Home />}>
+            <Route path="/dashboard" element={<Home />}>
                 <Route path="userlist" element={<UserList />}></Route>
                 <Route path="viewcategory" element={<Viewcategory />}></Route>
                 <Route path="addcategory" element={<Addcategory />}></Route>

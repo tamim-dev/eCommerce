@@ -29,7 +29,7 @@ const Login = () => {
                 notifyerror("you do not have premission for login");
             } else {
                 notifysuccess(user_data.data.success);
-                navigate("/home");
+                navigate("/dashboard");
                 dispatch(userData(user_data.data));
                 localStorage.setItem("user", JSON.stringify(user_data.data));
             }

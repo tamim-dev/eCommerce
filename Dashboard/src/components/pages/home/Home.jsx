@@ -23,17 +23,17 @@ const Home = () => {
     }
     const items = [
         loginData.role == "Admin" &&
-        getItem("User", "sub1", <MailOutlined />, [
-            getItem("Users", "/home/userlist"),
-        ]),
+            getItem("User", "sub1", <MailOutlined />, [
+                getItem("Users", "/dashboard/userlist"),
+            ]),
         getItem("Product", "sub2", <AppstoreOutlined />, [
             getItem("Categroy", "sub3", null, [
-                getItem("Add Category", "/home/addcategory"),
-                getItem("View Category", "/home/viewcategory"),
+                getItem("Add Category", "/dashboard/addcategory"),
+                getItem("View Category", "/dashboard/viewcategory"),
             ]),
             getItem("Sub Categroy", "sub5", null, [
-                getItem("Add Sub Category", "/home/addsubcategory"),
-                getItem("View Sub Category", "/home/viewsubcategory"),
+                getItem("Add Sub Category", "/dashboard/addsubcategory"),
+                getItem("View Sub Category", "/dashboard/viewsubcategory"),
             ]),
             getItem("Product", "sub6", null, [
                 getItem("Option 7", "15"),

@@ -40,13 +40,14 @@ const Addsubcategory = () => {
             values.subcaregory.slice(1);
         let data = {
             name: name,
-            ownerId: ownerId.id,
+            categoryId: categoryId,
         };
 
         let subcategoryData = await axios.post(
             "http://localhost:8000/api/v1/product/createsubcategory",
             data
         );
+        console.log(subcategoryData);
         if (subcategoryData.data.success) {
             form.resetFields();
             setMess(subcategoryData.data.success);

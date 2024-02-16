@@ -33,12 +33,12 @@ const Viewsubcategory = () => {
             let subcategoryData = await axios.get(
                 "http://localhost:8000/api/v1/product/allsubcategory"
             );
-
             subcategoryData.data.map((item) => {
                 arr.push({
                     key: item._id,
                     name: item.name,
                     isActive: item.isActive ? "Approved" : "Pending",
+                    category: item.categoryId.name,
                 });
             });
             setSubCategory(arr);
@@ -50,6 +50,10 @@ const Viewsubcategory = () => {
         {
             title: "Name",
             dataIndex: "name",
+        },
+        {
+            title: "category",
+            dataIndex: "category",
         },
         {
             title: "Active",
@@ -141,18 +145,28 @@ const Viewsubcategory = () => {
             data
         );
         setRealtime(!realtime);
-        console.log(subCategoryDelete);
 
         if (subCategoryDelete.data.success) {
             form.resetFields();
             setIsModalOpen(false);
+            setMessEdit(subCategoryDelete.data.success);
         } else if (subCategoryDelete.data.error) {
             setMessEdit(subCategoryDelete.data.error);
         }
     };
 
+    if (mess || messedit) {
+        setTimeout(() => {
+            setMess("");
+            setMessEdit("");
+        }, 4000);
+    }
+
     return (
         <>
+            <h1>Sub category</h1>
+            <p>{mess}</p>
+            <p>{messedit}</p>
             <Table columns={columns} dataSource={subcategory} />;
             <Modal
                 title="Basic Modal"
@@ -160,7 +174,6 @@ const Viewsubcategory = () => {
                 onOk={handleEdit}
                 onCancel={handleCancel}
             >
-                <p>{messedit}</p>
                 <Form
                     name="basic"
                     labelCol={{
@@ -178,7 +191,6 @@ const Viewsubcategory = () => {
                     autoComplete="off"
                     form={form}
                 >
-                    <p>{mess}</p>
                     <Form.Item
                         label="Caregory"
                         name="caregory"

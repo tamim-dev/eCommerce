@@ -7,6 +7,10 @@ const subCategorySchema = new Schema({
         type: String,
         required: true,
     },
+    isActive: {
+        type: Boolean,
+        default: false,
+    },
     categoryId: {
         type: mongoose.Types.ObjectId,
         ref: "Category",

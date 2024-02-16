@@ -14,6 +14,8 @@ const Viewsubcategory = () => {
     let [mess, setMess] = useState("");
     const [loadings, setLoadings] = useState(false);
     const [loadingstwo, setLoadingsTwo] = useState(false);
+    let [values, setValues] = useState("");
+    let [editid, setEditid] = useState("");
 
     const showModal = (id) => {
         setIsModalOpen(true);
@@ -134,17 +136,18 @@ const Viewsubcategory = () => {
             id: editid,
             name: name,
         };
-        let categoryDelete = await axios.post(
-            "http://localhost:8000/api/v1/product/editcategory",
+        let subCategoryDelete = await axios.post(
+            "http://localhost:8000/api/v1/product/editsubcategory",
             data
         );
         setRealtime(!realtime);
+        console.log(subCategoryDelete);
 
-        if (categoryDelete.data.success) {
+        if (subCategoryDelete.data.success) {
             form.resetFields();
             setIsModalOpen(false);
-        } else if (categoryDelete.data.error) {
-            setMessEdit(categoryDelete.data.error);
+        } else if (subCategoryDelete.data.error) {
+            setMessEdit(subCategoryDelete.data.error);
         }
     };
 

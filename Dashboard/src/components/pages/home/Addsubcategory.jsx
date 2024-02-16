@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Card, Form, Input } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Flex, Form, Input, Select } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -7,10 +7,37 @@ const Addsubcategory = () => {
     let ownerId = useSelector((state) => state.users.value);
     let [mess, setMess] = useState("");
     const [form] = Form.useForm();
+    let [subcategory, setSubCategory] = useState([]);
+    let [categoryId, setCategoryId] = useState("")
+
+    let handleChange =(value)=>{
+        setCategoryId(value);
+    }
+
+    useEffect(() => {
+        let arr = [];
+        async function category() {
+            let categoryData = await axios.get(
+                "http://localhost:8000/api/v1/product/allcategory"
+            );
+
+            categoryData.data.map((item) => {
+                if (!item.isActive) {
+                    arr.push({
+                        value: item._id,
+                        label: item.name,
+                    });
+                }
+            });
+            setSubCategory(arr);
+        }
+        category();
+    }, []);
 
     const onFinish = async (values) => {
         let name =
-            values.subcaregory.charAt(0).toUpperCase() + values.subcaregory.slice(1);
+            values.subcaregory.charAt(0).toUpperCase() +
+            values.subcaregory.slice(1);
         let data = {
             name: name,
             ownerId: ownerId.id,
@@ -74,7 +101,29 @@ const Addsubcategory = () => {
                         },
                     ]}
                 >
-                    <Input />
+                    <div style={{ display: "flex", columnGap: "10px" }}>
+                        <Input />
+                        <Select
+                            showSearch
+                            style={{
+                                width: 200,
+                            }}
+                            onChange={handleChange}
+                            placeholder="Search to Select"
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                                (option?.label ?? "").includes(input)
+                            }
+                            filterSort={(optionA, optionB) =>
+                                (optionA?.label ?? "")
+                                    .toLowerCase()
+                                    .localeCompare(
+                                        (optionB?.label ?? "").toLowerCase()
+                                    )
+                            }
+                            options={subcategory}
+                        />
+                    </div>
                 </Form.Item>
 
                 <Form.Item

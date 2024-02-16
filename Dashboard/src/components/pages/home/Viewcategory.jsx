@@ -89,6 +89,21 @@ const Viewcategory = () => {
         }
     };
 
+    let handleApprove = async (item) => {
+        setLoadingsTwo(item.key);
+        let data = {
+            isActive: item.isActive == "Pending" ? true : false,
+            id: item.key,
+        };
+        let approveCategory = await axios.post(
+            "http://localhost:8000/api/v1/product/approvecategory",
+            data
+        );
+        console.log(approveCategory);
+        setLoadingsTwo("");
+        setRealtime(!realtime);
+    };
+
     const columns = [
         {
             title: "Name",
@@ -135,7 +150,8 @@ const Viewcategory = () => {
                             className="buttonWidth"
                             icon={<PoweroffOutlined />}
                             loading
-                            type="primary" ghost
+                            type="primary"
+                            ghost
                         >
                             approve
                         </Button>
@@ -143,9 +159,13 @@ const Viewcategory = () => {
                         loginData.role == "Admin" && (
                             <Button
                                 className="buttonWidth"
-                                type="primary" ghost
+                                type="primary"
+                                ghost
+                                onClick={() => handleApprove(record)}
                             >
-                                approve
+                                {record.isActive == "Approved"
+                                    ? "Disable"
+                                    : "Approve"}
                             </Button>
                         )
                     )}

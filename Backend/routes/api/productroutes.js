@@ -9,6 +9,8 @@ const deleteCategory = require("../../controllers/deleteCategory");
 const deleteSubCategory = require("../../controllers/deleteSubCategory");
 const editCategoryController = require("../../controllers/editCategory");
 const editSubCategoryController = require("../../controllers/editSubCategory");
+const approveCategoryController = require("../../controllers/approveCategory");
+const approveSubCategoryController = require("../../controllers/editSubCategory");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);
@@ -20,5 +22,7 @@ router.post("/deletecategory", deleteCategory);
 router.post("/deletesubcategory", deleteSubCategory);
 router.post("/editcategory", editCategoryController);
 router.post("/editsubcategory", editSubCategoryController);
+router.post("/approvecategory", approveCategoryController);
+router.post("/approvesubcategory", approveSubCategoryController);
 
 module.exports = router;

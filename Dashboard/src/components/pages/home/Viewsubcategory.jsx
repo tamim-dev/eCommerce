@@ -52,7 +52,7 @@ const Viewsubcategory = () => {
             dataIndex: "name",
         },
         {
-            title: "category",
+            title: "Category",
             dataIndex: "category",
         },
         {
@@ -98,18 +98,18 @@ const Viewsubcategory = () => {
                             loading
                             type="primary"
                             ghost
-                        >
-                            approve
-                        </Button>
+                        ></Button>
                     ) : (
                         loginData.role == "Admin" && (
                             <Button
                                 className="buttonWidth"
-                                onClick={() => handleDelete(record)}
+                                onClick={() => handleApprove(record)}
                                 type="primary"
                                 ghost
                             >
-                                approve
+                                {record.isActive == "Approved"
+                                    ? "Disable"
+                                    : "Approve"}
                             </Button>
                         )
                     )}
@@ -153,6 +153,21 @@ const Viewsubcategory = () => {
         } else if (subCategoryDelete.data.error) {
             setMessEdit(subCategoryDelete.data.error);
         }
+    };
+
+    let handleApprove = async (item) => {
+        setLoadingsTwo(item.key);
+        let data = {
+            isActive: item.isActive == "Pending" ? true : false,
+            id: item.key,
+        };
+        let approveCategory = await axios.post(
+            "http://localhost:8000/api/v1/product/approvesubcategory",
+            data
+        );
+        console.log(approveCategory);
+        setLoadingsTwo("");
+        setRealtime(!realtime);
     };
 
     if (mess || messedit) {

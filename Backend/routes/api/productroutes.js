@@ -10,7 +10,7 @@ const deleteSubCategory = require("../../controllers/deleteSubCategory");
 const editCategoryController = require("../../controllers/editCategory");
 const editSubCategoryController = require("../../controllers/editSubCategory");
 const approveCategoryController = require("../../controllers/approveCategory");
-const approveSubCategoryController = require("../../controllers/editSubCategory");
+const approveSubCategoryController = require("../../controllers/approveSubCategory");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);

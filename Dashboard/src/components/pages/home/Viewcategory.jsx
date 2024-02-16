@@ -133,9 +133,7 @@ const Viewcategory = () => {
                             icon={<PoweroffOutlined />}
                             loading
                             danger
-                        >
-                            Delete
-                        </Button>
+                        ></Button>
                     ) : (
                         <Button
                             className="buttonWidth"
@@ -152,9 +150,7 @@ const Viewcategory = () => {
                             loading
                             type="primary"
                             ghost
-                        >
-                            approve
-                        </Button>
+                        ></Button>
                     ) : (
                         loginData.role == "Admin" && (
                             <Button

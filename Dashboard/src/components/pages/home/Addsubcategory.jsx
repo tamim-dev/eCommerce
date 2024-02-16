@@ -22,7 +22,7 @@ const Addsubcategory = () => {
             );
 
             categoryData.data.map((item) => {
-                if (!item.isActive) {
+                if (item.isActive) {
                     arr.push({
                         value: item._id,
                         label: item.name,

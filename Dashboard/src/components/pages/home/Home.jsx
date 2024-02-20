@@ -36,8 +36,8 @@ const Home = () => {
                 getItem("View Sub Category", "/dashboard/viewsubcategory"),
             ]),
             getItem("Product", "sub6", null, [
-                getItem("Option 7", "15"),
-                getItem("Option 8", "16"),
+                getItem("Add Product", "/dashboard/addproduct"),
+                getItem("View Product", "/dashboard/viewproduct"),
             ]),
         ]),
         {
@@ -63,7 +63,7 @@ const Home = () => {
                             width: "100%",
                         }}
                         defaultSelectedKeys={["1"]}
-                        defaultOpenKeys={["sub1", "sub2", "sub3", "sub5"]}
+                        defaultOpenKeys={["sub1", "sub2", "sub3", "sub5","sub6"]}
                         mode="inline"
                         items={items}
                     />

@@ -2,12 +2,25 @@
     margin-top: 1rem;
     background: #e6f4ff;
     padding: 0.3125rem 0;
-    border: 1px #91CAFF solid;
+    border: 1px #91caff solid;
     border-radius: 0.5rem;
 }
 
-.alert_registra .alert_a_tag{
+.alert_registra .alert_a_tag {
     margin-left: 0.3125rem;
 }
 
-
+.inputveriant {
+    display: flex;
+    column-gap: 6px;
+}
+.productDiv {
+    display: flex;
+    column-gap: 6px;
+    justify-content: space-between;
+}
+.subveriant {
+    display: flex;
+    column-gap: 20px;
+    font-size: 18px;
+}

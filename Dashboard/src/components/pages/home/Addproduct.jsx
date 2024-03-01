@@ -3,26 +3,31 @@ import { Button, Form, Input, Card } from "antd";
 
 const Addproduct = () => {
     let [value, setValue] = useState("");
-    let [varinatvalue, setVarinatvalue] = useState([]);
+    let [variantvalue, setVariantValue] = useState("");
+    let [variant, setVariant] = useState([]);
     let [valuestock, setValueStock] = useState("");
+    const { TextArea } = Input;
     const onFinish = async (values) => {
-        let arr = [...varinatvalue];
+        console.log("submit");
+    };
 
+    const handleVariant = () => {
+        let arr = [...variant];
         arr.push({
-            name: values.variantname,
+            name: variantvalue,
             value: [],
         });
-        setVarinatvalue(arr);
+        setVariant(arr);
     };
-    const { TextArea } = Input;
 
     const handleVariantValue = (index) => {
-        varinatvalue[index].value.push({
+        variant[index].value.push({
+            id: Math.random(),
             name: value,
             stock: valuestock,
         });
-        let arr = [...varinatvalue];
-        setVarinatvalue(arr);
+        let arr = [...variant];
+        setVariant(arr);
     };
 
     return (
@@ -89,7 +94,7 @@ const Addproduct = () => {
                             style={{
                                 display: "flex",
                                 alignItems: "center",
-                                columnGap:"6px"
+                                columnGap: "6px",
                             }}
                         >
                             <Form.Item
@@ -102,20 +107,24 @@ const Addproduct = () => {
                                     },
                                 ]}
                             >
-                                <Input />
+                                <Input
+                                    onChange={(e) =>
+                                        setVariantValue(e.target.value)
+                                    }
+                                />
                             </Form.Item>
                             <Button
+                                onClick={handleVariant}
                                 style={{ marginTop: "15px" }}
                                 type="primary"
-                                htmlType="submit"
                             >
                                 Add Variant
                             </Button>
                         </div>
 
-                        {varinatvalue.length > 0 &&
-                            varinatvalue.map((item, index) => (
-                                <>
+                        {variant.length > 0 &&
+                            variant.map((item, index) => (
+                                <div key={index}>
                                     <p>
                                         <b>{item.name}</b>
                                     </p>
@@ -133,7 +142,7 @@ const Addproduct = () => {
                                             }
                                         />
                                         <Button
-                                        type="primary"
+                                            type="primary"
                                             onClick={() =>
                                                 handleVariantValue(index)
                                             }
@@ -143,7 +152,7 @@ const Addproduct = () => {
                                     </div>
 
                                     {item.value.map((i) => (
-                                        <div className="subveriant">
+                                        <div className="subveriant" key={i.id}>
                                             <p>
                                                 <b>Name: </b> {i.name}
                                             </p>
@@ -152,7 +161,7 @@ const Addproduct = () => {
                                             </p>
                                         </div>
                                     ))}
-                                </>
+                                </div>
                             ))}
                     </div>
                 </div>

@@ -21,6 +21,6 @@
 }
 .subveriant {
     display: flex;
-    column-gap: 20px;
     font-size: 18px;
+    justify-content: space-between;
 }

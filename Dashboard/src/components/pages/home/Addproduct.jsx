@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Card } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 const Addproduct = () => {
     let [value, setValue] = useState("");
@@ -22,11 +23,22 @@ const Addproduct = () => {
 
     const handleVariantValue = (index) => {
         variant[index].value.push({
-            id: Math.random(),
             name: value,
             stock: valuestock,
         });
         let arr = [...variant];
+        setVariant(arr);
+    };
+
+    const handleDelete = (index) => {
+        let arr = [...variant];
+        arr.splice(index, 1);
+        setVariant(arr);
+    };
+
+    const handleSubDelete = (index, id) => {
+        let arr = [...variant];
+        arr[index].value.splice(id, 1);
         setVariant(arr);
     };
 
@@ -121,10 +133,31 @@ const Addproduct = () => {
                                 Add Variant
                             </Button>
                         </div>
-
                         {variant.length > 0 &&
                             variant.map((item, index) => (
-                                <div key={index}>
+                                <Card
+                                    key={index}
+                                    style={{
+                                        width: "100%",
+                                        textAlign: "center",
+                                        margin: "10px auto",
+                                        background: "#F9F9F9",
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            textAlign: "end",
+                                        }}
+                                    >
+                                        <CloseCircleOutlined
+                                            onClick={() => handleDelete(index)}
+                                            style={{
+                                                fontSize: "20px",
+                                                color: "red",
+                                                cursor: "pointer",
+                                            }}
+                                        />
+                                    </div>
                                     <p>
                                         <b>{item.name}</b>
                                     </p>
@@ -150,18 +183,37 @@ const Addproduct = () => {
                                             Add
                                         </Button>
                                     </div>
-
-                                    {item.value.map((i) => (
-                                        <div className="subveriant" key={i.id}>
-                                            <p>
-                                                <b>Name: </b> {i.name}
-                                            </p>
-                                            <p>
-                                                <b>Stock: </b> {i.stock}
-                                            </p>
-                                        </div>
+                                    {item.value.map((i, id) => (
+                                        <Card
+                                            style={{
+                                                margin: "6px auto",
+                                            }}
+                                            key={id}
+                                        >
+                                            <div className="subveriant">
+                                                <p>
+                                                    <b>Name: </b> {i.name}
+                                                </p>
+                                                <p>
+                                                    <b>Stock: </b> {i.stock}
+                                                </p>
+                                                <CloseCircleOutlined
+                                                    onClick={() =>
+                                                        handleSubDelete(
+                                                            index,
+                                                            id
+                                                        )
+                                                    }
+                                                    style={{
+                                                        fontSize: "20px",
+                                                        color: "red",
+                                                        cursor: "pointer",
+                                                    }}
+                                                />
+                                            </div>
+                                        </Card>
                                     ))}
-                                </div>
+                                </Card>
                             ))}
                     </div>
                 </div>

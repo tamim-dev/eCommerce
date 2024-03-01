@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
+const variantValueSchema = new Schema({
+    name: String,
+    stock: Number,
+});
+
+const variantSchema = new Schema({
+    name: String,
+    value: [variantValueSchema],
+});
+
 const productSchema = new Schema({
     name: {
         type: String,
@@ -15,26 +25,7 @@ const productSchema = new Schema({
         type: String,
         required: true,
     },
-    price: {
-        type: Number,
-        required: true,
-    },
-    brand: {
-        type: String,
-    },
-    regularprice: {
-        type: Number,
-        required: true,
-    },
-    status: {
-        type: String,
-        enum: ["InStock", "OutOFStock"],
-        default: "InStock",
-    },
-    rating: {
-        type: Number,
-        required: true,
-    },
+    variant: [variantSchema],
 });
 
 module.exports = mongoose.model("Product", productSchema);

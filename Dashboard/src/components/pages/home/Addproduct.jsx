@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form, Input, Card } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
@@ -9,7 +10,15 @@ const Addproduct = () => {
     let [valuestock, setValueStock] = useState("");
     const { TextArea } = Input;
     const onFinish = async (values) => {
-        console.log("submit");
+        let data = await axios.post(
+            "http://localhost:8000/api/v1/product/createproduct",
+            {
+                name: values.name,
+                description: values.description,
+                variant: variant,
+            }
+        );
+        console.log(data);
     };
 
     const handleVariant = () => {

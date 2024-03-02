@@ -10,7 +10,7 @@ const Addcategory = () => {
 
     const onFinish = async (values) => {
         let name =
-            values.caregory.charAt(0).toUpperCase() + values.caregory.slice(1);
+            values.category.charAt(0).toUpperCase() + values.category.slice(1);
         let data = {
             name: name,
             ownerId: ownerId.id,
@@ -65,12 +65,12 @@ const Addcategory = () => {
             >
                 <p>{mess}</p>
                 <Form.Item
-                    label="Caregory"
-                    name="caregory"
+                    label="Category"
+                    name="category"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your Caregory Name!",
+                            message: "Please input your Category Name!",
                         },
                     ]}
                 >

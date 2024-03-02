@@ -36,8 +36,8 @@ const Addsubcategory = () => {
 
     const onFinish = async (values) => {
         let name =
-            values.subcaregory.charAt(0).toUpperCase() +
-            values.subcaregory.slice(1);
+            values.subcategory.charAt(0).toUpperCase() +
+            values.subcategory.slice(1);
         let data = {
             name: name,
             categoryId: categoryId,
@@ -93,12 +93,12 @@ const Addsubcategory = () => {
             >
                 <p>{mess}</p>
                 <Form.Item
-                    label="Sub Caregory"
-                    name="subcaregory"
+                    label="Sub Category"
+                    name="subcategory"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your Caregory Name!",
+                            message: "Please input your sub Category Name!",
                         },
                     ]}
                 >

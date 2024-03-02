@@ -44,10 +44,12 @@ const Home = () => {
             type: "divider",
         },
         getItem("Navigation Three", "sub4", <SettingOutlined />, [
+            getItem("Add store", "/dashboard/addstore"),
+            getItem("View store", "/dashboard/viewstore"),
+        ]),
+        getItem("Navigation Three", "sub7", <SettingOutlined />, [
             getItem("Option 9", "9"),
             getItem("Option 10", "10"),
-            getItem("Option 11", "11"),
-            getItem("Option 12", "12"),
         ]),
     ];
     const onClick = (e) => {
@@ -63,7 +65,7 @@ const Home = () => {
                             width: "100%",
                         }}
                         defaultSelectedKeys={["1"]}
-                        defaultOpenKeys={["sub1", "sub2", "sub3", "sub5","sub6"]}
+                        defaultOpenKeys={["sub2", "sub4", "sub6"]}
                         mode="inline"
                         items={items}
                     />

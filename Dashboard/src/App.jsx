@@ -21,6 +21,8 @@ import Addsubcategory from "./components/pages/home/Addsubcategory";
 import Viewsubcategory from "./components/pages/home/Viewsubcategory";
 import Viewproduct from "./components/pages/home/Viewproduct";
 import Addproduct from "./components/pages/home/Addproduct";
+import Addstore from "./components/pages/home/Addstore";
+import Viewstore from "./components/pages/home/Viewstore";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -47,6 +49,8 @@ const router = createBrowserRouter(
                 ></Route>
                 <Route path="viewproduct" element={<Viewproduct />}></Route>
                 <Route path="addproduct" element={<Addproduct />}></Route>
+                <Route path="addstore" element={<Addstore />}></Route>
+                <Route path="viewstore" element={<Viewstore />}></Route>
             </Route>
         </Route>
     )

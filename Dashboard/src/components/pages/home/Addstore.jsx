@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Button, Card, Flex, Form, Input, Select } from "antd";
 
 const Addstore = () => {
-    const onFinish = async (values) => {};
+    const onFinish = async (values) => {
+        let data = await axios.post(
+            "http://localhost:8000/api/v1/product/createstore",
+            {
+                storename: values.storename,
+                nidnumber: values.nidnumber,
+                tradenumber: values.tradenumber,
+            }
+        );
+        console.log(data);
+    };
     return (
         <Card
-            title="Add sub Category"
+            title="Add Store"
             bordered={false}
             style={{
                 width: "100%",

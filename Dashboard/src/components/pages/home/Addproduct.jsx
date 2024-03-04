@@ -18,7 +18,6 @@ const Addproduct = () => {
                 variant: variant,
             }
         );
-        console.log(data);
     };
 
     const handleVariant = () => {

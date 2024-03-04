@@ -11,4 +11,21 @@ function passwordValidation(password) {
     return pattern.test(password);
 }
 
-module.exports = { emailValidation, passwordValidation };
+function TradValidation(tradenumber) {
+    let pattern = /^TRAD\/[A-Z]{4}\/\d{6}\/\d{4}$/;
+
+    return pattern.test(tradenumber);
+}
+
+function nidValidation(nidnumber) {
+    let pattern = /^[0-9]{10}$/;
+
+    return pattern.test(nidnumber);
+}
+
+module.exports = {
+    emailValidation,
+    passwordValidation,
+    TradValidation,
+    nidValidation,
+};

@@ -11,6 +11,7 @@ const editCategoryController = require("../../controllers/editCategory");
 const editSubCategoryController = require("../../controllers/editSubCategory");
 const approveCategoryController = require("../../controllers/approveCategory");
 const approveSubCategoryController = require("../../controllers/approveSubCategory");
+const storeController = require("../../controllers/storeController");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);
@@ -18,10 +19,14 @@ router.get("/allsubcategory", allsubCategoryController);
 router.post("/createcategory", categoryController);
 router.post("/createsubcategory", subCategoryController);
 router.post("/createproduct", productController);
+router.post("/createstore", storeController);
+
 router.post("/deletecategory", deleteCategory);
 router.post("/deletesubcategory", deleteSubCategory);
+
 router.post("/editcategory", editCategoryController);
 router.post("/editsubcategory", editSubCategoryController);
+
 router.post("/approvecategory", approveCategoryController);
 router.post("/approvesubcategory", approveSubCategoryController);
 

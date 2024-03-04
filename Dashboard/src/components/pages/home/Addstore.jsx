@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Card, Flex, Form, Input, Select } from "antd";
+import { useSelector } from "react-redux";
 
 const Addstore = () => {
+    let ownerId = useSelector((state) => state.users.value);
+    
     const onFinish = async (values) => {
         let data = await axios.post(
             "http://localhost:8000/api/v1/product/createstore",
@@ -10,6 +13,7 @@ const Addstore = () => {
                 storename: values.storename,
                 nidnumber: values.nidnumber,
                 tradenumber: values.tradenumber,
+                ownerId: ownerId.id,
             }
         );
         console.log(data);

@@ -1,14 +1,38 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Button, Form, Input, Card } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, Card, Select } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 const Addproduct = () => {
+    
     let [value, setValue] = useState("");
     let [variantvalue, setVariantValue] = useState("");
     let [variant, setVariant] = useState([]);
     let [valuestock, setValueStock] = useState("");
+    let [storeId, setStoreId] = useState("");
+    let [store, setStore] = useState([]);
     const { TextArea } = Input;
+
+    useEffect(() => {
+        let arr = [];
+        async function store() {
+            let storeData = await axios.get(
+                "http://localhost:8000/api/v1/product/allcategory"
+            );
+
+            storeData.data.map((item) => {
+                if (item.isActive) {
+                    arr.push({
+                        value: item._id,
+                        label: item.name,
+                    });
+                }
+            });
+            setStore(arr);
+        }
+        store();
+    }, []);
+
     const onFinish = async (values) => {
         let data = await axios.post(
             "http://localhost:8000/api/v1/product/createproduct",
@@ -48,6 +72,10 @@ const Addproduct = () => {
         let arr = [...variant];
         arr[index].value.splice(id, 1);
         setVariant(arr);
+    };
+
+    let handleChange = (value) => {
+        setStoreId(value);
     };
 
     return (
@@ -98,6 +126,27 @@ const Addproduct = () => {
                         >
                             <TextArea placeholder="description" />
                         </Form.Item>
+                        <Select
+                            showSearch
+                            style={{
+                                width: 200,
+                                marginBottom: 20,
+                            }}
+                            onChange={handleChange}
+                            placeholder="Search to Select"
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                                (option?.label ?? "").includes(input)
+                            }
+                            filterSort={(optionA, optionB) =>
+                                (optionA?.label ?? "")
+                                    .toLowerCase()
+                                    .localeCompare(
+                                        (optionB?.label ?? "").toLowerCase()
+                                    )
+                            }
+                            options={store}
+                        />
                         <Form.Item
                             wrapperCol={{
                                 offset: 0,

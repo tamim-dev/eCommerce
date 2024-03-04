@@ -47,7 +47,7 @@ const Addsubcategory = () => {
             "http://localhost:8000/api/v1/product/createsubcategory",
             data
         );
-        console.log(subcategoryData);
+        
         if (subcategoryData.data.success) {
             form.resetFields();
             setMess(subcategoryData.data.success);

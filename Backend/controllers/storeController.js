@@ -2,7 +2,7 @@ const Store = require("../model/storeSchema");
 const { TradValidation, nidValidation } = require("../helpers/validation");
 
 let storeController = async (req, res) => {
-    let { storename, nidnumber, tradenumber } = req.body;
+    let { storename, nidnumber, tradenumber,ownerId } = req.body;
 
     let existingStore = await Store.find({ storename: storename });
     let existingTred = await Store.find({ tradenumber: tradenumber });
@@ -26,6 +26,7 @@ let storeController = async (req, res) => {
             storename: storename,
             tradenumber: tradenumber,
             nidnumber: nidnumber,
+            ownerId: ownerId
         });
         store.save().then(() => {
             res.send({ success: "Store Created" });

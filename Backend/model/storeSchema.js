@@ -18,6 +18,10 @@ const storeSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    ownerId: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+    },
 });
 
 module.exports = mongoose.model("store", storeSchema);

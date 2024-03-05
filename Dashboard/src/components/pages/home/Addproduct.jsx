@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Card, Select } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 const Addproduct = () => {
-    
     let [value, setValue] = useState("");
     let [variantvalue, setVariantValue] = useState("");
     let [variant, setVariant] = useState([]);
@@ -12,21 +12,21 @@ const Addproduct = () => {
     let [storeId, setStoreId] = useState("");
     let [store, setStore] = useState([]);
     const { TextArea } = Input;
+    let ownerId = useSelector((state) => state.users.value);
 
     useEffect(() => {
         let arr = [];
         async function store() {
             let storeData = await axios.get(
-                "http://localhost:8000/api/v1/product/allcategory"
+                `http://localhost:8000/api/v1/product/allstore/${ownerId.id}`
             );
-
             storeData.data.map((item) => {
-                if (item.isActive) {
-                    arr.push({
-                        value: item._id,
-                        label: item.name,
-                    });
-                }
+                // if (item.isActive) {
+                arr.push({
+                    value: item._id,
+                    label: item.storename,
+                });
+                // }
             });
             setStore(arr);
         }
@@ -133,7 +133,7 @@ const Addproduct = () => {
                                 marginBottom: 20,
                             }}
                             onChange={handleChange}
-                            placeholder="Search to Select"
+                            placeholder="Select Brand Name"
                             optionFilterProp="children"
                             filterOption={(input, option) =>
                                 (option?.label ?? "").includes(input)

@@ -12,9 +12,11 @@ const editSubCategoryController = require("../../controllers/editSubCategory");
 const approveCategoryController = require("../../controllers/approveCategory");
 const approveSubCategoryController = require("../../controllers/approveSubCategory");
 const storeController = require("../../controllers/storeController");
+const allStoreController = require("../../controllers/allstoreController");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);
+router.get("/allstore/:id", allStoreController);
 
 router.post("/createcategory", categoryController);
 router.post("/createsubcategory", subCategoryController);

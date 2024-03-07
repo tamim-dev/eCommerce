@@ -86,7 +86,7 @@ const Registration = () => {
                         },
                     ]}
                 >
-                    <Input placeholder="email" />
+                    <Input placeholder="email" type="email"/>
                 </Form.Item>
 
                 <Form.Item

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
-import { Button, Card, Flex, Form, Input, Select } from "antd";
+import { Button, Card, Form, Input } from "antd";
 import { useSelector } from "react-redux";
 
 const Addstore = () => {
     let ownerId = useSelector((state) => state.users.value);
-    
+
     const onFinish = async (values) => {
         let data = await axios.post(
             "http://localhost:8000/api/v1/product/createstore",

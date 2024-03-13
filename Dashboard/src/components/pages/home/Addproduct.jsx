@@ -34,14 +34,15 @@ const Addproduct = () => {
     }, []);
 
     const onFinish = async (values) => {
-        let data = await axios.post(
-            "http://localhost:8000/api/v1/product/createproduct",
-            {
-                name: values.name,
-                description: values.description,
-                variant: variant,
-            }
-        );
+        // let data = await axios.post(
+        //     "http://localhost:8000/api/v1/product/createproduct",
+        //     {
+        //         name: values.name,
+        //         description: values.description,
+        //         variant: variant,
+        //     }
+        // );
+        console.log(variant);
     };
 
     const handleVariant = () => {

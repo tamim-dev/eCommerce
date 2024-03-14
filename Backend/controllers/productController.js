@@ -6,7 +6,7 @@ let productController = (req, res) => {
     let product = new Products({
         name: name,
         description: description,
-        // variant: variant,
+        variant: variant,
         image: `uploads/${req.file.filename}`,
     });
     product.save();

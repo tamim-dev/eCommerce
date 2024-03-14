@@ -10,6 +10,8 @@ const Addproduct = () => {
     let [variant, setVariant] = useState([]);
     let [valuestock, setValueStock] = useState("");
     let [storeId, setStoreId] = useState("");
+    let [images, setImages] = useState("");
+    let [imagePrev, setImagePrev] = useState("");
     let [store, setStore] = useState([]);
     const { TextArea } = Input;
     let ownerId = useSelector((state) => state.users.value);
@@ -34,16 +36,24 @@ const Addproduct = () => {
     }, []);
 
     const onFinish = async (values) => {
-        // let data = await axios.post(
-        //     "http://localhost:8000/api/v1/product/createproduct",
-        //     {
-        //         name: values.name,
-        //         description: values.description,
-        //         variant: variant,
-        //     }
-        // );
-        console.log(variant);
+        let data = await axios.post(
+            "http://localhost:8000/api/v1/product/createproduct",
+            {
+                name: values.name,
+                description: values.description,
+                variant: variant,
+                avatar: images,
+            },
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        console.log(data);
     };
+
+    console.log(variant);
 
     const handleVariant = () => {
         let arr = [...variant];
@@ -77,6 +87,11 @@ const Addproduct = () => {
 
     let handleChange = (value) => {
         setStoreId(value);
+    };
+
+    let handleImage = (value) => {
+        setImages(value.target.files[0]);
+        setImagePrev(URL.createObjectURL(value.target.files[0]));
     };
 
     return (
@@ -127,27 +142,31 @@ const Addproduct = () => {
                         >
                             <TextArea placeholder="description" />
                         </Form.Item>
-                        <Select
-                            showSearch
-                            style={{
-                                width: 200,
-                                marginBottom: 20,
-                            }}
-                            onChange={handleChange}
-                            placeholder="Select Brand Name"
-                            optionFilterProp="children"
-                            filterOption={(input, option) =>
-                                (option?.label ?? "").includes(input)
-                            }
-                            filterSort={(optionA, optionB) =>
-                                (optionA?.label ?? "")
-                                    .toLowerCase()
-                                    .localeCompare(
-                                        (optionB?.label ?? "").toLowerCase()
-                                    )
-                            }
-                            options={store}
-                        />
+                        <div>
+                            <input type="file" onChange={handleImage} />
+                            <img src={imagePrev} />
+                            <Select
+                                showSearch
+                                style={{
+                                    width: 200,
+                                    marginBottom: 20,
+                                }}
+                                onChange={handleChange}
+                                placeholder="Select Brand Name"
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                    (option?.label ?? "").includes(input)
+                                }
+                                filterSort={(optionA, optionB) =>
+                                    (optionA?.label ?? "")
+                                        .toLowerCase()
+                                        .localeCompare(
+                                            (optionB?.label ?? "").toLowerCase()
+                                        )
+                                }
+                                options={store}
+                            />
+                        </div>
                         <Form.Item
                             wrapperCol={{
                                 offset: 0,
@@ -231,6 +250,7 @@ const Addproduct = () => {
                                             onChange={(e) =>
                                                 setValueStock(e.target.value)
                                             }
+                                            type="number"
                                         />
                                         <Button
                                             type="primary"

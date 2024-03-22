@@ -10,6 +10,7 @@ const Addproduct = () => {
     let [variant, setVariant] = useState([]);
     let [valuestock, setValueStock] = useState("");
     let [storeId, setStoreId] = useState("");
+    let [variantnon, setVariantNon] = useState("");
     let [images, setImages] = useState("");
     let [imagePrev, setImagePrev] = useState("");
     let [store, setStore] = useState([]);
@@ -92,6 +93,10 @@ const Addproduct = () => {
     let handleImage = (value) => {
         setImages(value.target.files[0]);
         setImagePrev(URL.createObjectURL(value.target.files[0]));
+    };
+
+    let variantchange = (value) => {
+        setVariantNon(value.label);
     };
 
     return (
@@ -186,29 +191,56 @@ const Addproduct = () => {
                                 columnGap: "6px",
                             }}
                         >
-                            <Form.Item
-                                label="Variant Name"
-                                name="variantname"
-                                rules={[
+                            <Select
+                                labelInValue
+                                defaultValue={{
+                                    value: "Non Variant",
+                                    label: "nonvariant",
+                                }}
+                                onChange={variantchange}
+                                style={{
+                                    width: 120,
+                                    marginTop: "15px",
+                                }}
+                                options={[
                                     {
-                                        required: true,
-                                        message: "Please input your variant!",
+                                        value: "Non Variant",
+                                        label: "nonvariant",
+                                    },
+                                    {
+                                        value: "Variant",
+                                        label: "variant",
                                     },
                                 ]}
-                            >
-                                <Input
-                                    onChange={(e) =>
-                                        setVariantValue(e.target.value)
-                                    }
-                                />
-                            </Form.Item>
-                            <Button
-                                onClick={handleVariant}
-                                style={{ marginTop: "15px" }}
-                                type="primary"
-                            >
-                                Add Variant
-                            </Button>
+                            />
+                            {variantnon == "variant" && (
+                                <>
+                                    <Form.Item
+                                        label="Variant Name"
+                                        name="variantname"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    "Please input your variant!",
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            onChange={(e) =>
+                                                setVariantValue(e.target.value)
+                                            }
+                                        />
+                                    </Form.Item>
+                                    <Button
+                                        onClick={handleVariant}
+                                        style={{ marginTop: "15px" }}
+                                        type="primary"
+                                    >
+                                        Add Variant
+                                    </Button>
+                                </>
+                            )}
                         </div>
                         {variant.length > 0 &&
                             variant.map((item, index) => (

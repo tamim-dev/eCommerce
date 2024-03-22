@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Card, Select } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const Addproduct = () => {
     let [value, setValue] = useState("");
@@ -134,7 +136,21 @@ const Addproduct = () => {
                         >
                             <Input placeholder="Product name" />
                         </Form.Item>
-
+                        <CKEditor
+                            editor={ClassicEditor}
+                            onReady={(editor) => {
+                                console.log("Editor is ready to use!", editor);
+                            }}
+                            onChange={(event,value) => {
+                                console.log(value.getData());
+                            }}
+                            onBlur={(event, editor) => {
+                                console.log("Blur.", editor);
+                            }}
+                            onFocus={(event, editor) => {
+                                console.log("Focus.", editor);
+                            }}
+                        />
                         <Form.Item
                             label="Description"
                             name="description"

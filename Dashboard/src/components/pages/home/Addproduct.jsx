@@ -136,21 +136,26 @@ const Addproduct = () => {
                         >
                             <Input placeholder="Product name" />
                         </Form.Item>
-                        <CKEditor
-                            editor={ClassicEditor}
-                            onReady={(editor) => {
-                                console.log("Editor is ready to use!", editor);
-                            }}
-                            onChange={(event,value) => {
-                                console.log(value.getData());
-                            }}
-                            onBlur={(event, editor) => {
-                                console.log("Blur.", editor);
-                            }}
-                            onFocus={(event, editor) => {
-                                console.log("Focus.", editor);
-                            }}
-                        />
+                        {variantnon == "variant" && (
+                            <CKEditor
+                                editor={ClassicEditor}
+                                onReady={(editor) => {
+                                    console.log(
+                                        "Editor is ready to use!",
+                                        editor
+                                    );
+                                }}
+                                onChange={(event, value) => {
+                                    console.log(value.getData());
+                                }}
+                                onBlur={(event, editor) => {
+                                    console.log("Blur.", editor);
+                                }}
+                                onFocus={(event, editor) => {
+                                    console.log("Focus.", editor);
+                                }}
+                            />
+                        )}
                         <Form.Item
                             label="Description"
                             name="description"

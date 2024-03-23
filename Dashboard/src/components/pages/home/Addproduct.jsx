@@ -12,12 +12,12 @@ const Addproduct = () => {
     let [variant, setVariant] = useState([]);
     let [valuestock, setValueStock] = useState("");
     let [storeId, setStoreId] = useState("");
-    let [variantnon, setVariantNon] = useState("");
+
     let [images, setImages] = useState("");
     let [imagePrev, setImagePrev] = useState("");
     let [description, setDescription] = useState("");
     let [store, setStore] = useState([]);
-    const { TextArea } = Input;
+
     let ownerId = useSelector((state) => state.users.value);
 
     useEffect(() => {
@@ -59,36 +59,6 @@ const Addproduct = () => {
 
     console.log(variant);
 
-    const handleVariant = () => {
-        let arr = [...variant];
-        arr.push({
-            name: variantvalue,
-            value: [],
-        });
-        setVariant(arr);
-    };
-
-    const handleVariantValue = (index) => {
-        variant[index].value.push({
-            name: value,
-            stock: valuestock,
-        });
-        let arr = [...variant];
-        setVariant(arr);
-    };
-
-    const handleDelete = (index) => {
-        let arr = [...variant];
-        arr.splice(index, 1);
-        setVariant(arr);
-    };
-
-    const handleSubDelete = (index, id) => {
-        let arr = [...variant];
-        arr[index].value.splice(id, 1);
-        setVariant(arr);
-    };
-
     let handleChange = (value) => {
         setStoreId(value);
     };
@@ -96,10 +66,6 @@ const Addproduct = () => {
     let handleImage = (value) => {
         setImages(value.target.files[0]);
         setImagePrev(URL.createObjectURL(value.target.files[0]));
-    };
-
-    let variantchange = (value) => {
-        setVariantNon(value.label);
     };
 
     return (
@@ -124,7 +90,7 @@ const Addproduct = () => {
                 autoComplete="off"
             >
                 <div className="productDiv">
-                    <div style={{ width: "48%" }}>
+                    <div style={{ width: "100%" }}>
                         <Form.Item
                             label="Name"
                             name="name"
@@ -137,7 +103,7 @@ const Addproduct = () => {
                         >
                             <Input placeholder="Product name" />
                         </Form.Item>
-                        {variantnon == "variant" ? (
+
                         <Form.Item>
                             <CKEditor
                                 editor={ClassicEditor}
@@ -157,27 +123,7 @@ const Addproduct = () => {
                                     console.log("Focus.", editor);
                                 }}
                             />
-                            </Form.Item>
-                        ) : (
-                            <Form.Item
-                                label="Description"
-                                name="description"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message:
-                                            "Please input your description",
-                                    },
-                                ]}
-                            >
-                                <TextArea
-                                    onChange={(e) =>
-                                        setDescription(e.target.value)
-                                    }
-                                    placeholder="description"
-                                />
-                            </Form.Item>
-                        )}
+                        </Form.Item>
 
                         <div>
                             <Form.Item
@@ -223,7 +169,7 @@ const Addproduct = () => {
                             </Button>
                         </Form.Item>
                     </div>
-                    <div style={{ width: "48%" }}>
+                    {/* <div style={{ width: "48%" }}>
                         <div
                             style={{
                                 display: "flex",
@@ -231,29 +177,7 @@ const Addproduct = () => {
                                 columnGap: "6px",
                             }}
                         >
-                            <Select
-                                labelInValue
-                                defaultValue={{
-                                    value: "Non Variant",
-                                    label: "nonvariant",
-                                }}
-                                onChange={variantchange}
-                                style={{
-                                    width: 120,
-                                    marginTop: "15px",
-                                }}
-                                options={[
-                                    {
-                                        value: "Non Variant",
-                                        label: "nonvariant",
-                                    },
-                                    {
-                                        value: "Variant",
-                                        label: "variant",
-                                    },
-                                ]}
-                            />
-                            {/* {variantnon == "variant" && (
+                            {variantnon == "variant" && (
                                 <>
                                     <Form.Item
                                         label="Variant Name"
@@ -280,9 +204,9 @@ const Addproduct = () => {
                                         Add Variant
                                     </Button>
                                 </>
-                            )} */}
+                            )}
                         </div>
-                        {/* {variant.length > 0 &&
+                        {variant.length > 0 &&
                             variant.map((item, index) => (
                                 <Card
                                     key={index}
@@ -364,8 +288,8 @@ const Addproduct = () => {
                                         </Card>
                                     ))}
                                 </Card>
-                            ))} */}
-                    </div>
+                            ))}
+                    </div> */}
                 </div>
             </Form>
         </Card>

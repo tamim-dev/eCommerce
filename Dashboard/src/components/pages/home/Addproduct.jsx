@@ -15,6 +15,7 @@ const Addproduct = () => {
     let [variantnon, setVariantNon] = useState("");
     let [images, setImages] = useState("");
     let [imagePrev, setImagePrev] = useState("");
+    let [description, setDescription] = useState("");
     let [store, setStore] = useState([]);
     const { TextArea } = Input;
     let ownerId = useSelector((state) => state.users.value);
@@ -43,7 +44,7 @@ const Addproduct = () => {
             "http://localhost:8000/api/v1/product/createproduct",
             {
                 name: values.name,
-                description: values.description,
+                description: description,
                 variant: variant,
                 avatar: images,
             },
@@ -136,7 +137,8 @@ const Addproduct = () => {
                         >
                             <Input placeholder="Product name" />
                         </Form.Item>
-                        {variantnon == "variant" && (
+                        {variantnon == "variant" ? (
+                        <Form.Item>
                             <CKEditor
                                 editor={ClassicEditor}
                                 onReady={(editor) => {
@@ -146,7 +148,7 @@ const Addproduct = () => {
                                     );
                                 }}
                                 onChange={(event, value) => {
-                                    console.log(value.getData());
+                                    setDescription(value.getData());
                                 }}
                                 onBlur={(event, editor) => {
                                     console.log("Blur.", editor);
@@ -155,43 +157,60 @@ const Addproduct = () => {
                                     console.log("Focus.", editor);
                                 }}
                             />
+                            </Form.Item>
+                        ) : (
+                            <Form.Item
+                                label="Description"
+                                name="description"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please input your description",
+                                    },
+                                ]}
+                            >
+                                <TextArea
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
+                                    placeholder="description"
+                                />
+                            </Form.Item>
                         )}
-                        <Form.Item
-                            label="Description"
-                            name="description"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Please input your description",
-                                },
-                            ]}
-                        >
-                            <TextArea placeholder="description" />
-                        </Form.Item>
+
                         <div>
+                            <Form.Item
+                                wrapperCol={{
+                                    offset: 0,
+                                    span: 100,
+                                }}
+                            >
+                                <Select
+                                    showSearch
+                                    style={{
+                                        marginBottom: 20,
+                                    }}
+                                    onChange={handleChange}
+                                    placeholder="Select Brand Name"
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        (option?.label ?? "").includes(input)
+                                    }
+                                    filterSort={(optionA, optionB) =>
+                                        (optionA?.label ?? "")
+                                            .toLowerCase()
+                                            .localeCompare(
+                                                (
+                                                    optionB?.label ?? ""
+                                                ).toLowerCase()
+                                            )
+                                    }
+                                    options={store}
+                                />
+                            </Form.Item>
                             <input type="file" onChange={handleImage} />
                             <img src={imagePrev} />
-                            <Select
-                                showSearch
-                                style={{
-                                    width: 200,
-                                    marginBottom: 20,
-                                }}
-                                onChange={handleChange}
-                                placeholder="Select Brand Name"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    (option?.label ?? "").includes(input)
-                                }
-                                filterSort={(optionA, optionB) =>
-                                    (optionA?.label ?? "")
-                                        .toLowerCase()
-                                        .localeCompare(
-                                            (optionB?.label ?? "").toLowerCase()
-                                        )
-                                }
-                                options={store}
-                            />
                         </div>
                         <Form.Item
                             wrapperCol={{
@@ -234,7 +253,7 @@ const Addproduct = () => {
                                     },
                                 ]}
                             />
-                            {variantnon == "variant" && (
+                            {/* {variantnon == "variant" && (
                                 <>
                                     <Form.Item
                                         label="Variant Name"
@@ -261,9 +280,9 @@ const Addproduct = () => {
                                         Add Variant
                                     </Button>
                                 </>
-                            )}
+                            )} */}
                         </div>
-                        {variant.length > 0 &&
+                        {/* {variant.length > 0 &&
                             variant.map((item, index) => (
                                 <Card
                                     key={index}
@@ -345,7 +364,7 @@ const Addproduct = () => {
                                         </Card>
                                     ))}
                                 </Card>
-                            ))}
+                            ))} */}
                     </div>
                 </div>
             </Form>

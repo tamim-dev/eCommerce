@@ -26,6 +26,7 @@ const approveSubCategoryController = require("../../controllers/approveSubCatego
 const storeController = require("../../controllers/storeController");
 const allStoreController = require("../../controllers/allstoreController");
 const allProductController = require("../../controllers/allProductController");
+const variantController = require("../../controllers/variantController");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);
@@ -35,6 +36,7 @@ router.get("/allstore/:id", allStoreController);
 router.post("/createcategory", categoryController);
 router.post("/createsubcategory", subCategoryController);
 router.post("/createproduct", upload.single("avatar"), productController);
+router.post("/createvariant", upload.single("avatar"), variantController);
 router.post("/createstore", storeController);
 
 router.post("/deletecategory", deleteCategory);

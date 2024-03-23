@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const variantValueSchema = new Schema({
-    name: String,
-    stock: Number,
-});
+// const variantValueSchema = new Schema({
+//     name: String,
+//     stock: Number,
+// });
 
-const variantSchema = new Schema({
-    name: String,
-    value: [variantValueSchema],
-});
+// const variantSchema = new Schema({
+//     name: String,
+//     value: [variantValueSchema],
+// });
 
 const productSchema = new Schema({
     name: {
@@ -22,7 +22,7 @@ const productSchema = new Schema({
     image: {
         type: String,
     },
-    variant: [variantSchema],
+    // variant: [variantSchema],
 });
 
 module.exports = mongoose.model("Product", productSchema);

@@ -39,12 +39,11 @@ const Addvariant = () => {
 
     const onFinish = async (values) => {
         let data = await axios.post(
-            "http://localhost:8000/api/v1/product/createproduct",
+            "http://localhost:8000/api/v1/product/createvariant",
             {
                 name: values.name,
-                description: description,
-                variant: variant,
                 avatar: images,
+                productId: productId,
             },
             {
                 headers: {

@@ -23,6 +23,7 @@ import Viewproduct from "./components/pages/home/Viewproduct";
 import Addproduct from "./components/pages/home/Addproduct";
 import Addstore from "./components/pages/home/Addstore";
 import Viewstore from "./components/pages/home/Viewstore";
+import Addvariant from "./components/pages/home/Addvariant";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
                 <Route path="addproduct" element={<Addproduct />}></Route>
                 <Route path="addstore" element={<Addstore />}></Route>
                 <Route path="viewstore" element={<Viewstore />}></Route>
+                <Route path="addvariant" element={<Addvariant />}></Route>
             </Route>
         </Route>
     )

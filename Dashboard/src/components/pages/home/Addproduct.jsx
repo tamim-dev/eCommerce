@@ -210,7 +210,7 @@ const Addproduct = () => {
                                 />
                             </Form.Item>
                             <input type="file" onChange={handleImage} />
-                            <img src={imagePrev} />
+                            <img width={200} src={imagePrev} />
                         </div>
                         <Form.Item
                             wrapperCol={{

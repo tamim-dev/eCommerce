@@ -27,13 +27,14 @@ const storeController = require("../../controllers/storeController");
 const allStoreController = require("../../controllers/allstoreController");
 const allProductController = require("../../controllers/allProductController");
 const variantController = require("../../controllers/variantController");
+const secureApi = require("../../middleware/secureApi");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);
 router.get("/allproduct", allProductController);
 router.get("/allstore/:id", allStoreController);
 
-router.post("/createcategory", categoryController);
+router.post("/createcategory", secureApi, categoryController);
 router.post("/createsubcategory", subCategoryController);
 router.post("/createproduct", upload.single("avatar"), productController);
 router.post("/createvariant", upload.single("avatar"), variantController);

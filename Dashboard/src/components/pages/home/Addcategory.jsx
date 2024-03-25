@@ -18,8 +18,12 @@ const Addcategory = () => {
 
         let categoryData = await axios.post(
             "http://localhost:8000/api/v1/product/createcategory",
-            data
+            data,
+            {
+                headers: { Authorization: "checking" },
+            }
         );
+        console.log(categoryData);
         if (categoryData.data.success) {
             form.resetFields();
             setMess(categoryData.data.success);

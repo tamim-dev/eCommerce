@@ -8,11 +8,11 @@ const Addsubcategory = () => {
     let [mess, setMess] = useState("");
     const [form] = Form.useForm();
     let [subcategory, setSubCategory] = useState([]);
-    let [categoryId, setCategoryId] = useState("")
+    let [categoryId, setCategoryId] = useState("");
 
-    let handleChange =(value)=>{
+    let handleChange = (value) => {
         setCategoryId(value);
-    }
+    };
 
     useEffect(() => {
         let arr = [];
@@ -22,12 +22,12 @@ const Addsubcategory = () => {
             );
 
             categoryData.data.map((item) => {
-                if (item.isActive) {
-                    arr.push({
-                        value: item._id,
-                        label: item.name,
-                    });
-                }
+                // if (item.isActive) {
+                arr.push({
+                    value: item._id,
+                    label: item.name,
+                });
+                // }
             });
             setSubCategory(arr);
         }
@@ -47,7 +47,7 @@ const Addsubcategory = () => {
             "http://localhost:8000/api/v1/product/createsubcategory",
             data
         );
-        
+
         if (subcategoryData.data.success) {
             form.resetFields();
             setMess(subcategoryData.data.success);

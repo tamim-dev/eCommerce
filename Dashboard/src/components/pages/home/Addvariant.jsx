@@ -51,7 +51,6 @@ const Addvariant = () => {
                 },
             }
         );
-        console.log(data);
     };
 
     let handleImage = (value) => {
@@ -106,7 +105,7 @@ const Addvariant = () => {
                                     marginBottom: 20,
                                 }}
                                 onChange={handleChange}
-                                placeholder="Select Brand Name"
+                                placeholder="Select Product"
                                 optionFilterProp="children"
                                 filterOption={(input, option) =>
                                     (option?.label ?? "").includes(input)

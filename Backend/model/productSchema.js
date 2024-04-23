@@ -15,13 +15,13 @@ const productSchema = new Schema({
         type: String,
     },
     regularprice: {
-        type: String,
+        type: Number,
     },
     salesprice: {
-        type: String,
+        type: Number,
     },
     quantity: {
-        type: String,
+        type: Number,
     },
     
 });

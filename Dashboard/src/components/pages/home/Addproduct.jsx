@@ -45,6 +45,9 @@ const Addproduct = () => {
             {
                 name: values.name,
                 description: description,
+                regularprice: values.regularprice,
+                salesprice: values.salesprice,
+                quantity: values.quantity,
                 variant: variant,
                 avatar: images,
             },
@@ -124,7 +127,42 @@ const Addproduct = () => {
                                 }}
                             />
                         </Form.Item>
-
+                        <Form.Item
+                            label="Regular price"
+                            name="regularprice"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input Regular price",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Regular price" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Sales price"
+                            name="salesprice"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input Sales price",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Sales price" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Quantity"
+                            name="quantity"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input Quantity",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Product quantity" />
+                        </Form.Item>
                         <div>
                             <Form.Item
                                 wrapperCol={{
@@ -169,127 +207,6 @@ const Addproduct = () => {
                             </Button>
                         </Form.Item>
                     </div>
-                    {/* <div style={{ width: "48%" }}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                columnGap: "6px",
-                            }}
-                        >
-                            {variantnon == "variant" && (
-                                <>
-                                    <Form.Item
-                                        label="Variant Name"
-                                        name="variantname"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    "Please input your variant!",
-                                            },
-                                        ]}
-                                    >
-                                        <Input
-                                            onChange={(e) =>
-                                                setVariantValue(e.target.value)
-                                            }
-                                        />
-                                    </Form.Item>
-                                    <Button
-                                        onClick={handleVariant}
-                                        style={{ marginTop: "15px" }}
-                                        type="primary"
-                                    >
-                                        Add Variant
-                                    </Button>
-                                </>
-                            )}
-                        </div>
-                        {variant.length > 0 &&
-                            variant.map((item, index) => (
-                                <Card
-                                    key={index}
-                                    style={{
-                                        width: "100%",
-                                        textAlign: "center",
-                                        margin: "10px auto",
-                                        background: "#F9F9F9",
-                                    }}
-                                >
-                                    <div
-                                        style={{
-                                            textAlign: "end",
-                                        }}
-                                    >
-                                        <CloseCircleOutlined
-                                            onClick={() => handleDelete(index)}
-                                            style={{
-                                                fontSize: "20px",
-                                                color: "red",
-                                                cursor: "pointer",
-                                            }}
-                                        />
-                                    </div>
-                                    <p>
-                                        <b>{item.name}</b>
-                                    </p>
-                                    <div className="inputveriant">
-                                        <Input
-                                            placeholder="value name"
-                                            onChange={(e) =>
-                                                setValue(e.target.value)
-                                            }
-                                        />
-                                        <Input
-                                            placeholder="Sotck"
-                                            onChange={(e) =>
-                                                setValueStock(e.target.value)
-                                            }
-                                            type="number"
-                                        />
-                                        <Button
-                                            type="primary"
-                                            onClick={() =>
-                                                handleVariantValue(index)
-                                            }
-                                        >
-                                            Add
-                                        </Button>
-                                    </div>
-                                    {item.value.map((i, id) => (
-                                        <Card
-                                            style={{
-                                                margin: "6px auto",
-                                            }}
-                                            key={id}
-                                        >
-                                            <div className="subveriant">
-                                                <p>
-                                                    <b>Name: </b> {i.name}
-                                                </p>
-                                                <p>
-                                                    <b>Stock: </b> {i.stock}
-                                                </p>
-                                                <CloseCircleOutlined
-                                                    onClick={() =>
-                                                        handleSubDelete(
-                                                            index,
-                                                            id
-                                                        )
-                                                    }
-                                                    style={{
-                                                        fontSize: "20px",
-                                                        color: "red",
-                                                        cursor: "pointer",
-                                                    }}
-                                                />
-                                            </div>
-                                        </Card>
-                                    ))}
-                                </Card>
-                            ))}
-                    </div> */}
                 </div>
             </Form>
         </Card>

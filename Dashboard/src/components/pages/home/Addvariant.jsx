@@ -44,6 +44,9 @@ const Addvariant = () => {
                 name: values.name,
                 avatar: images,
                 productId: productId,
+                regularprice: values.regularprice,
+                salesprice: values.salesprice,
+                quantity: values.quantity,
             },
             {
                 headers: {
@@ -96,6 +99,42 @@ const Addvariant = () => {
                             ]}
                         >
                             <Input placeholder="Variant name" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Regular price"
+                            name="regularprice"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input Regular price",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Regular price" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Sales price"
+                            name="salesprice"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input Sales price",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Sales price" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Quantity"
+                            name="quantity"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input Quantity",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Product quantity" />
                         </Form.Item>
 
                         <Form.Item>

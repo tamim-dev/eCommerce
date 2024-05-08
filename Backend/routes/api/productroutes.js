@@ -27,10 +27,12 @@ const storeController = require("../../controllers/storeController");
 const allStoreController = require("../../controllers/allstoreController");
 const allProductController = require("../../controllers/allProductController");
 const variantController = require("../../controllers/variantController");
+const singleCategoryController = require("../../controllers/singleCategoryController");
 const secureApi = require("../../middleware/secureApi");
 
 router.get("/allcategory", allCategoryController);
 router.get("/allsubcategory", allsubCategoryController);
+router.get("/singlecategory", singleCategoryController);
 router.get("/allproduct", allProductController);
 router.get("/allstore/:id", allStoreController);
 

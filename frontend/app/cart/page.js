@@ -1,9 +1,31 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
-import Image from 'next/image'
+
 
 export default function Cart() {
+    
+    let increment = async (id,type)=>{
+        const res = await fetch(`http://localhost:8000/api/v1/product/createcart?type=${type}`,
+        {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({productId: id})
+           }
+        )
+
+
+        if (!res.ok) {
+
+          throw new Error('Failed to fetch data')
+        }
+
+        console.log(res)
+    }
+
 return(
     <Container>
         <Table striped bordered hover>

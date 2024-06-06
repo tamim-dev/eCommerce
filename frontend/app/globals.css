@@ -21,3 +21,7 @@
         text-wrap: balance;
     }
 }
+
+#basic-navbar-nav{
+    justify-content: end;
+}

@@ -1,10 +1,11 @@
-import Button from "@/components/button";
+import Cart from "@/components/Home/cart";
+import NavBar from "@/components/navbar";
 
 export default function Home() {
     return (
         <>
-            <h1>Home</h1>
-            <Button />
+            <NavBar />
+            <Cart />
         </>
     );
 }

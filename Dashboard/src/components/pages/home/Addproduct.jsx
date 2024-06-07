@@ -48,7 +48,7 @@ const Addproduct = () => {
                 regularprice: values.regularprice,
                 salesprice: values.salesprice,
                 quantity: values.quantity,
-                variant: variant,
+                // variant: variant,
                 avatar: images,
             },
             {
@@ -57,10 +57,10 @@ const Addproduct = () => {
                 },
             }
         );
-        console.log(data);
+     
     };
 
-    console.log(variant);
+ 
 
     let handleChange = (value) => {
         setStoreId(value);
